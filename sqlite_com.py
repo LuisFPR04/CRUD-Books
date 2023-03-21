@@ -23,6 +23,8 @@ def DelBooks(value1, value2):
 #    cur.execute(f"UPDATE Books SET {value1} = '{value2}' WHERE = {value3}")
 
 AddBooks("Alloy of Law", "Brandon Sanderson", "Nova", 30, "2011", 403)
-res = cur.execute("SELECT * FROM books")
+def ReadBooks():
+    res = cur.execute("SELECT * FROM books")
+    print(res.fetchall())
 
-print(res.fetchall())
+ReadBooks()
