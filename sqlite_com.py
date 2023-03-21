@@ -1,5 +1,6 @@
 import sqlite3
 
+
 con = sqlite3.connect("booktable.db")
 cur = con.cursor()
 try:
@@ -22,9 +23,8 @@ def DelBooks(value1, value2):
 #def UpdateBooks(value1, value2, value3):
 #    cur.execute(f"UPDATE Books SET {value1} = '{value2}' WHERE = {value3}")
 
-AddBooks("Alloy of Law", "Brandon Sanderson", "Nova", 30, "2011", 403)
 def ReadBooks():
     res = cur.execute("SELECT * FROM books")
-    print(res.fetchall())
-
-ReadBooks()
+    #print(res.fetchall())
+    for row in res:
+        print(row[0])
