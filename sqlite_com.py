@@ -27,4 +27,4 @@ def ReadBooks():
     res = cur.execute("SELECT * FROM books")
     #print(res.fetchall())
     for row in res:
-        print(row[0])
+        print(row[0], row[1], row[2], row[3], row[4], row[5])
