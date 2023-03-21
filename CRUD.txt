@@ -1,0 +1,18 @@
+--Hacerlo con sqlite
+-Por temas de legibilidad
+--Usar Tkinter para este proyecto
+
+--De dos a tres archivo, uno para los comandos sql, otro para la interfaz grafica y otro para 'interactuar'
+-Añadir 'filtros' para hacer la busqueda accesible (opcional)
+-Lectura de otros archivos de sqlite (opcional)
+-Añadir los botones correspondientes a cada columna para eliminar, añadir o actualizar
+
+---Casillas a añadir---
+--Tabla 1 acerca de libros. Las casillas serán:
+-Nombre del libro
+-Autor
+-Editorial
+-Precio
+-Fecha de publicación
+-N° de paginas
+-Rating
