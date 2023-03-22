@@ -15,4 +15,5 @@
 -Precio
 -Fecha de publicación
 -N° de paginas
--Rating
+
+>> $ git config --global user.email luisfpera@gmail.com
