@@ -57,12 +57,12 @@ def query():
     release_date_frame = Frame(root)
     page_number_frame = Frame(root)
 
-    name_frame.grid(row=4, column=0)
-    author_frame.grid(row=4, column=1)
-    publisher_frame.grid(row=4, column=2)
-    price_frame.grid(row=4, column=3)
-    release_date_frame.grid(row=4, column=4)
-    page_number_frame.grid(row=4, column=5)
+    name_frame.grid(row=10, column=0)
+    author_frame.grid(row=10, column=1)
+    publisher_frame.grid(row=10, column=2)
+    price_frame.grid(row=10, column=3)
+    release_date_frame.grid(row=10, column=4)
+    page_number_frame.grid(row=10, column=5)
 
     name_label = Label(name_frame, text="Name").grid(row=0, column=0)
     author_label = Label(author_frame, text="Author").grid(row=0, column=0)
@@ -78,26 +78,36 @@ def query():
     release_date_data = Label(release_date_frame, text=ReleaseDate).grid(row=1, column=0)
     page_number_data = Label(page_number_frame, text=PageNumber).grid(row=1, column=0)  
 
-def delete(value1, value2):
+def delete():
     con = sqlite3.connect("booktable.db")
     con.cursor()
 
-    if type(value2) == str:
-        cur.execute(f"DELETE FROM BOOKS WHERE {value1} = '{value2}'")
-    if type(value2) == int:
-        cur.execute(f"DELETE FROM BOOKS WHERE {value1} > {value2}")
+    if type(CampDel_label.get()) == str:
+        cur.execute(f"DELETE FROM BOOKS WHERE {selected_optionDel.get()} = '{CampDel_label.get()}'")
+    if type(CampDel_label.get()) == int:
+        cur.execute(f"DELETE FROM BOOKS WHERE {selected_optionDel.get()} > {CampDel_label.get()}")
 
     con.commit()
     con.close()
 
 def update():
-    print("Something")
+    con = sqlite3.connect("booktable.db")
+    con.cursor()
+
+    cur.execute(f"UPDATE Books SET {selected_optionUp1.get()} = '{CampUP.get()}' WHERE {selected_optionUp2.get()} = '{CampUP2.get()}'")
+
+    con.commit()
+    con.close()
 
 root = Tk()
 root.title("CRUD Books")
 root.iconbitmap("book_icon.png")
 root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 #Botones y cajas de texto
+selected_optionDel = StringVar()
+selected_optionUp1 = StringVar()
+selected_optionUp2 = StringVar()
+options = ["Name", "Author", "Publisher", "Price", "ReleaseDate", "PageNumber"]
 
 Name = Entry(root, width=30)
 Name.grid(row=1, column=0, padx=20)
@@ -111,6 +121,15 @@ ReleaseDate = Entry(root, width=30)
 ReleaseDate.grid(row=1, column=4, padx=20)
 PageNumber = Entry(root, width=30)
 PageNumber.grid(row=1, column=5, padx=20)
+dropdownDel = OptionMenu(root, selected_optionDel, *options).grid(row=7, column=0, padx=20)
+dropdownUpdate = OptionMenu(root, selected_optionUp1, *options).grid(row=5, column=0, padx=20) #The one that makes reference to what is change
+dropdownReference= OptionMenu(root, selected_optionUp2, *options).grid(row=5, column=1, padx=20) #The conditional 'where' on the SQL command
+CampDel_label = Entry(root, width=30)
+CampDel_label.grid(row=7, column=1, padx=20)
+CampUP = Entry(root, width=30)
+CampUP.grid(row=5, column=2, padx=20)
+CampUP2 = Entry(root, width=30)
+CampUP2.grid(row=5, column=3, padx=20)
 
 name_label = Label(root, text="Book name").grid(row=0, column=0)
 author_label = Label(root, text="Author name").grid(row=0, column=1)
@@ -118,11 +137,17 @@ publisher_label = Label(root, text="Publisher").grid(row=0, column=2)
 price_label = Label(root, text="Book's price (US Dolar)").grid(row=0, column=3)
 ReleaseDate_label = Label(root, text="Release Date (YYYY)").grid(row=0, column=4)
 PageNumber_label = Label(root, text="Number of pages").grid(row=0, column=5)
+CampName_label = Label(root, text="Name camp to reference").grid(row=4, column=0)
+SelecUp_label = Label(root, text="Camp to update").grid(row=4, column=1)
+SelecValue_label = Label(root, text="Value").grid(row=4, column=2)
+SelecValueWhere_= Label(root, text="Value reference").grid(row=4, column=3)
+CampName_label = Label(root, text="Name camp to reference").grid(row=6, column=0)
+SelecDel_label = Label(root, text="Camp to delete").grid(row=6, column=1)
 
 submit_button = Button(root, text="Add to book Database", command=submit).grid(row=2,column = 0, pady=10, padx=10)
-delete_button = Button(root, text="Delete from book Database", command=delete).grid(row=2,column = 1, pady=10, padx=10)
-update_button = Button(root, text="Update from book Database", command=update).grid(row=2,column = 2, pady=10, padx=10)
-query_button = Button(root, text="Show records", command=query).grid(row=2,column = 3, pady=10, padx=10)
+delete_button = Button(root, text="Delete from book Database", command=delete).grid(row=7,column = 2, pady=10, padx=10)
+update_button = Button(root, text="Update from book Database", command=update).grid(row=5,column = 4, pady=10, padx=10)
+query_button = Button(root, text="Show records", command=query).grid(row=2,column = 1, pady=10, padx=10)
 
 con.commit()
 root.mainloop()
