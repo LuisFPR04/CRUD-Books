@@ -1,9 +1,9 @@
 from tkinter import * 
 from CRUDbooktable import crud
 
-root2 = Tk()
-root2.title("Librería Pepe")
+root = Tk()
+root.title("Librería Pepe")
 
-crudbutton = Button(root2, text="Book table", command=crud).grid(column=0,row=0)
+crudbutton = Button(root, text="Book table", command=crud).grid(column=0,row=0)
 
-root2.mainloop()
+root.mainloop()
