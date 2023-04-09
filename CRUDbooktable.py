@@ -198,5 +198,3 @@ def crud():
     con.commit()
     root.mainloop()
 
-crud()
-
